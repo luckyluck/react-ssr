@@ -5,10 +5,24 @@ import Home from './client/components/Home';
 
 const app = express();
 
+// Telling server to use folder as a static directory
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     const content = renderToString(<Home />);
 
-    res.send(content);
+    // Creating a HTML snippet to add js bundle to the sending page
+    const html = `
+        <html>
+            <head></head>
+            <body>
+                <div>${content}</div>
+                <script src="bundle.js"></script>
+            </body>
+        </html>
+    `;
+
+    res.send(html);
 });
 
 app.listen(3000, () => {
