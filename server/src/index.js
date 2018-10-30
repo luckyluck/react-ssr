@@ -6,8 +6,8 @@ const app = express();
 // Telling server to use folder as a static directory
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.send(renderer());
+app.get('*', (req, res) => {
+    res.send(renderer(req));
 });
 
 app.listen(3000, () => {
