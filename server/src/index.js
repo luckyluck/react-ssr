@@ -15,9 +15,10 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
     const store = createStore();
 
-    const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-        return route.loadData ? route.loadData(store) : null;
-    });
+    const promises = matchRoutes(Routes, req.path)
+        .map(({ route }) => {
+            return route.loadData ? route.loadData(store) : null;
+        });
 
     Promise.all(promises).then(() => {
         res.send(renderer(req, store));

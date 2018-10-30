@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { fetchUsers } from '../actions';
 
-class UsersList extends Component {
-    componentDidMount() {
-        this.props.fetchUsers();
-    }
+class UsersListPage extends Component {
+    // It could be useful in some cases, but not now
+    // componentDidMount() {
+    //     this.props.fetchUsers();
+    // }
 
     renderUsers() {
         return this.props.users.map(user => <li key={user.id}>{user.name}</li>);
@@ -22,13 +23,15 @@ class UsersList extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    users: state.users
-});
+function mapStateToProps(state) {
+    return { users: state.users };
+}
 
-const loadData = store => {
-    store.dispatch(fetchUsers());
+function loadData(store) {
+    return store.dispatch(fetchUsers());
+}
+
+export default {
+    loadData,
+    component: connect(mapStateToProps, { fetchUsers })(UsersListPage)
 };
-
-export { loadData };
-export default connect(mapStateToProps, { fetchUsers })(UsersList);
