@@ -9,21 +9,23 @@ class UsersListPage extends Component {
     }
 
     renderUsers() {
-        return this.props.users.map(user => <li key={user.id}>{user.name}</li>);
+        return this.props.users.map(
+            user => <li key={user.id} className="collection-item">{user.name}</li>
+        );
     }
 
     render() {
         return (
             <div>
                 Here's a big list of users:
-                <ul>{this.renderUsers()}</ul>
+                <ul className="collection">{this.renderUsers()}</ul>
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return { users: state.users };
+function mapStateToProps({ users }) {
+    return { users };
 }
 
 export default {
