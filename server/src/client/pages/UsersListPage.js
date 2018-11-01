@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 
 class UsersListPage extends Component {
-    // It could be useful in some cases, but not now
-    // componentDidMount() {
-    //     this.props.fetchUsers();
-    // }
+    componentDidMount() {
+        this.props.fetchUsers();
+    }
 
     renderUsers() {
         return this.props.users.map(user => <li key={user.id}>{user.name}</li>);
